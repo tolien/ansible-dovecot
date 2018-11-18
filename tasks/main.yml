@@ -3,6 +3,7 @@
 - name: Install Dovecot
   apt:
       name: dovecot-core,dovecot-managesieved,dovecot-imapd,dovecot-sieve
+  notify: restart dovecot
 
 - include: postgres.yml
   
