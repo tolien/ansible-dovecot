@@ -1,0 +1,11 @@
+
+- name: SSL cert and private key
+  template:
+    src: '{{ "etc/dovecot/private/" + item + ".j2" }}'
+    dest: '/etc/dovecot/private/{{ item }}'
+    owner: 'root'
+    group: 'root'
+    mode: '0400'
+  with_flattened:
+    - [ 'dovecot.key', 'dovecot.pem' ]
+  notify: restart dovecot
