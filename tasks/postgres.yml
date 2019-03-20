@@ -3,3 +3,4 @@
 - name: Install Dovecot Postgres support
   apt:
       name: dovecot-pgsql
+  notify: restart dovecot
