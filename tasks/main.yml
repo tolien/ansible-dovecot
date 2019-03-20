@@ -3,46 +3,56 @@
 - name: Install Dovecot
   apt:
       name: dovecot-core,dovecot-managesieved,dovecot-imapd,dovecot-sieve
-  notify: restart dovecot
 
 - include: postgres.yml
-  
+
 - name: template Dovecot conf.d/10-auth.conf
   template:
     src: etc/dovecot/conf.d/10-auth.conf.j2
     dest: /etc/dovecot/conf.d/10-auth.conf
+  notify: reload dovecot
 
 - name: template Dovecot conf.d/10-logging.conf
   template:
     src: etc/dovecot/conf.d/10-logging.conf.j2
     dest: /etc/dovecot/conf.d/10-logging.conf
+  notify: reload dovecot
 
 - name: template Dovecot conf.d/10-mail.conf
   template:
     src: etc/dovecot/conf.d/10-mail.conf.j2
     dest: /etc/dovecot/conf.d/10-mail.conf
-    
+  notify: reload dovecot
+
 - name: template Dovecot conf.d/10-master.conf
   template:
     src: etc/dovecot/conf.d/10-master.conf.j2
     dest: /etc/dovecot/conf.d/10-master.conf
+  notify: reload dovecot
 
 - name: template Dovecot conf.d/15-lda.conf
   template:
     src: etc/dovecot/conf.d/15-lda.conf.j2
     dest: /etc/dovecot/conf.d/15-lda.conf
+  notify: reload dovecot
 
 - name: template Dovecot conf.d/auth-checkpassword.conf.ext
   template:
     src: etc/dovecot/conf.d/auth-checkpassword.conf.ext.j2
     dest: /etc/dovecot/conf.d/auth-checkpassword.conf.ext
+  notify: reload dovecot
 
 - name: template Dovecot conf.d/auth-sql.conf.ext
   template:
     src: etc/dovecot/conf.d/auth-sql.conf.ext.j2
     dest: /etc/dovecot/conf.d/auth-sql.conf.ext
+  notify: reload dovecot
 
 - name: template Dovecot dovecot-sql.conf.ext
   template:
     src: etc/dovecot/dovecot-sql.conf.ext.j2
     dest: /etc/dovecot/dovecot-sql.conf.ext
+  notify: reload dovecot
+
+- include: tls.yml
+
