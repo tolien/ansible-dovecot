@@ -1,6 +1,12 @@
 # handlers file for dovecot
 ---
 - name: restart dovecot
-  service: 
+  service:
     name: dovecot
     state: restarted
+
+- name: reload dovecot
+  service:
+    name: dovecot
+    state: reloaded
+
